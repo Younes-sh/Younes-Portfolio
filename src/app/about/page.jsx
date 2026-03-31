@@ -213,7 +213,7 @@ export default function AboutPage() {
               {/* Contact Button */}
               <div className="mt-10 pt-6 border-t border-gray-100">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-all duration-300 group"
                 >
                   Let's Work Together
