@@ -11,6 +11,20 @@ const skills = [
   { name: 'Tailwind CSS', level: 90, icon: '🎨' },
   { name: 'GraphQL', level: 75, icon: '📊' },
   { name: 'Python', level: 70, icon: '🐍' },
+  { name: 'Docker', level: 30, icon: '🐳' },
+  { name: 'AWS', level: 25, icon: '☁️' },
+  { name: 'Git', level: 85, icon: '🔧' },
+  {name: 'Vercel', level: 90, icon: '🚀'},
+  {name: 'Netlify', level: 80, icon: '🌐'},
+  {name: 'linux', level: 70, icon: '🐧'},
+  {name: 'Redux', level: 80, icon: '🔄'},
+  {name: 'Sass', level: 75, icon: '💅'},
+  {name: 'Webpack', level: 65, icon: '📦'},
+  {name: 'Babel', level: 60, icon: '🔧'},
+  {name: 'ESLint', level: 80, icon: '🧹'},
+  {name: 'Prettier', level: 85, icon: '🎨'},
+  {name:'github', level: 90, icon: '🐙'},
+  {name:'cloudinary', level: 80, icon: '☁️'},
 ];
 
 export default function Skills() {
