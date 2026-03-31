@@ -5,6 +5,9 @@ import Footer from '../../components/Footer/Footer';
 export const metadata = {
   title: 'My Portfolio',
   description: 'Full Stack Developer Portfolio',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
