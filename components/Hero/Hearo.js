@@ -88,7 +88,7 @@ export default function Hero() {
               </svg>
             </Link>
             <Link
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition-all duration-300 hover:scale-105"
             >
               Get in Touch
