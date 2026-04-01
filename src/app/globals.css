@@ -1,60 +1,188 @@
 @import "tailwindcss";
 
+/* ===== Windows 2000 / Microsoft 2000 Design System ===== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Win2000 Color Palette */
+  --win-desktop:       #008080;   /* Classic teal desktop */
+  --win-titlebar:      #000080;   /* Deep navy title bar */
+  --win-titlebar-text: #ffffff;
+  --win-silver:        #d4d0c8;   /* Classic silver/gray */
+  --win-silver-light:  #f0ece0;   /* Light window background */
+  --win-silver-dark:   #808080;
+  --win-white:         #ffffff;
+  --win-black:         #000000;
+  --win-blue-link:     #0000ff;
+  --win-highlight:     #000080;   /* Selection highlight */
+  --win-highlight-text:#ffffff;
+  --win-disabled:      #808080;
+  --win-border-light:  #ffffff;
+  --win-border-dark:   #404040;
+  --win-border-mid:    #808080;
+
+  /* Semantic tokens */
+  --background:        var(--win-desktop);
+  --foreground:        var(--win-black);
+  --surface:           var(--win-silver);
+  --surface-light:     var(--win-silver-light);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: auto; /* Win2K had no smooth scroll */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--win-desktop);
+  color: var(--win-black);
+  font-family: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* ===== Win2000 3D / Beveled Border Utilities ===== */
+@layer utilities {
+  /* Raised panel (like a button or window) */
+  .win-raised {
+    border-top:    2px solid var(--win-border-light);
+    border-left:   2px solid var(--win-border-light);
+    border-right:  2px solid var(--win-border-dark);
+    border-bottom: 2px solid var(--win-border-dark);
+  }
+
+  /* Sunken panel (like an input field) */
+  .win-sunken {
+    border-top:    2px solid var(--win-border-dark);
+    border-left:   2px solid var(--win-border-dark);
+    border-right:  2px solid var(--win-border-light);
+    border-bottom: 2px solid var(--win-border-light);
+  }
+
+  /* Window frame - outer raised, inner darker */
+  .win-window {
+    border-top:    2px solid var(--win-border-light);
+    border-left:   2px solid var(--win-border-light);
+    border-right:  2px solid var(--win-border-dark);
+    border-bottom: 2px solid var(--win-border-dark);
+    background-color: var(--win-silver);
+  }
+
+  /* Classic Win2K title bar with gradient */
+  .win-titlebar {
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+  }
+
+  /* Button styles */
+  .win-btn {
+    background-color: var(--win-silver);
+    border-top:    2px solid var(--win-border-light);
+    border-left:   2px solid var(--win-border-light);
+    border-right:  2px solid var(--win-border-dark);
+    border-bottom: 2px solid var(--win-border-dark);
+    padding: 3px 12px;
+    font-family: 'Tahoma', Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--win-black);
+    white-space: nowrap;
+  }
+
+  .win-btn:active,
+  .win-btn-pressed {
+    border-top:    2px solid var(--win-border-dark);
+    border-left:   2px solid var(--win-border-dark);
+    border-right:  2px solid var(--win-border-light);
+    border-bottom: 2px solid var(--win-border-light);
+  }
+
+  /* Inset/sunken field */
+  .win-field {
+    background-color: var(--win-white);
+    border-top:    2px solid var(--win-border-dark);
+    border-left:   2px solid var(--win-border-dark);
+    border-right:  2px solid var(--win-border-light);
+    border-bottom: 2px solid var(--win-border-light);
+    padding: 3px 6px;
+    font-family: 'Tahoma', Arial, sans-serif;
+    font-size: 11px;
+    color: var(--win-black);
+  }
+
+  /* Progress bar */
+  .win-progress-track {
+    background-color: var(--win-white);
+    border-top:    2px solid var(--win-border-dark);
+    border-left:   2px solid var(--win-border-dark);
+    border-right:  2px solid var(--win-border-light);
+    border-bottom: 2px solid var(--win-border-light);
+    height: 16px;
+    overflow: hidden;
+  }
+
+  .win-progress-fill {
+    background: repeating-linear-gradient(
+      90deg,
+      #000080 0px,
+      #000080 8px,
+      #1084d0 8px,
+      #1084d0 12px
+    );
+    height: 100%;
+    transition: width 1s ease;
+  }
+
+  /* Separator line */
+  .win-separator {
+    border: none;
+    border-top: 1px solid var(--win-border-dark);
+    border-bottom: 1px solid var(--win-border-light);
+    margin: 4px 0;
+  }
+
+  /* Status bar */
+  .win-statusbar {
+    background-color: var(--win-silver);
+    border-top: 1px solid var(--win-border-dark);
+    border-bottom: 1px solid var(--win-border-light);
+    padding: 2px 8px;
+    font-size: 11px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .win-status-panel {
+    border-top:   1px solid var(--win-border-dark);
+    border-left:  1px solid var(--win-border-dark);
+    border-right: 1px solid var(--win-border-light);
+    border-bottom:1px solid var(--win-border-light);
+    padding: 0 6px;
+    font-size: 11px;
+  }
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-white text-gray-900;
-    font-family: var(--font-inter);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-space);
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-}
