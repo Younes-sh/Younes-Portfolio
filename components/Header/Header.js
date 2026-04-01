@@ -17,87 +17,166 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={60}
-              height={60}
-              className="inline-block mr-2"
-            />
-            
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`${
-                  pathname === item.href
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-600 hover:text-blue-600'
-                } px-3 py-2 text-sm font-medium transition-colors`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-600"
+    <header
+      style={{
+        backgroundColor: '#d4d0c8',
+        borderBottom: '2px solid #404040',
+        borderTop: '2px solid #ffffff',
+        fontFamily: "'Tahoma', 'MS Sans Serif', Arial, sans-serif",
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+      }}
+    >
+      {/* Menu bar row */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '4px 12px',
+          backgroundColor: '#d4d0c8',
+        }}
+      >
+        {/* Logo + site name */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={32}
+            height={32}
+            style={{ imageRendering: 'pixelated' }}
+          />
+          <span
+            style={{
+              fontSize: '11px',
+              fontWeight: 'bold',
+              color: '#000000',
+              fontFamily: "'Tahoma', Arial, sans-serif",
+            }}
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+            Younes.Portfolio
+          </span>
+        </Link>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`${
-                  pathname === item.href
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-600 hover:bg-gray-50'
-                } block px-3 py-2 rounded-md text-base font-medium`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </nav>
+        {/* Desktop nav — Win2000 menu-bar style */}
+        <nav
+          style={{ display: 'flex', alignItems: 'center', gap: '2px' }}
+          className="hidden md:flex"
+        >
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              style={{
+                display: 'inline-block',
+                padding: '3px 10px',
+                fontSize: '11px',
+                fontFamily: "'Tahoma', Arial, sans-serif",
+                color: '#000000',
+                textDecoration: 'none',
+                backgroundColor: pathname === item.href ? '#000080' : 'transparent',
+                color: pathname === item.href ? '#ffffff' : '#000000',
+                borderTop:    pathname === item.href ? '2px solid #808080' : '2px solid transparent',
+                borderLeft:   pathname === item.href ? '2px solid #808080' : '2px solid transparent',
+                borderRight:  pathname === item.href ? '2px solid #ffffff' : '2px solid transparent',
+                borderBottom: pathname === item.href ? '2px solid #ffffff' : '2px solid transparent',
+              }}
+              onMouseEnter={(e) => {
+                if (pathname !== item.href) {
+                  e.currentTarget.style.backgroundColor = '#000080';
+                  e.currentTarget.style.color = '#ffffff';
+                  e.currentTarget.style.borderTop    = '2px solid #808080';
+                  e.currentTarget.style.borderLeft   = '2px solid #808080';
+                  e.currentTarget.style.borderRight  = '2px solid #ffffff';
+                  e.currentTarget.style.borderBottom = '2px solid #ffffff';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (pathname !== item.href) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#000000';
+                  e.currentTarget.style.borderTop    = '2px solid transparent';
+                  e.currentTarget.style.borderLeft   = '2px solid transparent';
+                  e.currentTarget.style.borderRight  = '2px solid transparent';
+                  e.currentTarget.style.borderBottom = '2px solid transparent';
+                }
+              }}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile hamburger — styled as Win2K button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden"
+          style={{
+            backgroundColor: '#d4d0c8',
+            borderTop:    '2px solid #ffffff',
+            borderLeft:   '2px solid #ffffff',
+            borderRight:  '2px solid #404040',
+            borderBottom: '2px solid #404040',
+            padding: '3px 8px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontFamily: "'Tahoma', Arial, sans-serif",
+          }}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? '▲ Menu' : '▼ Menu'}
+        </button>
+      </div>
+
+      {/* Win2K-style separator */}
+      <div
+        style={{
+          height: '1px',
+          backgroundColor: '#808080',
+          borderBottom: '1px solid #ffffff',
+          margin: '0 0',
+        }}
+      />
+
+      {/* Mobile dropdown — looks like a context menu */}
+      {isMenuOpen && (
+        <nav
+          style={{
+            backgroundColor: '#d4d0c8',
+            borderLeft:   '2px solid #ffffff',
+            borderRight:  '2px solid #404040',
+            borderBottom: '2px solid #404040',
+            position: 'absolute',
+            right: '12px',
+            top: '100%',
+            minWidth: '160px',
+            zIndex: 100,
+            boxShadow: '2px 2px 0 #000000',
+          }}
+          className="md:hidden"
+        >
+          {navigation.map((item, idx) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              style={{
+                display: 'block',
+                padding: '4px 20px',
+                fontSize: '11px',
+                fontFamily: "'Tahoma', Arial, sans-serif",
+                textDecoration: 'none',
+                backgroundColor: pathname === item.href ? '#000080' : 'transparent',
+                color: pathname === item.href ? '#ffffff' : '#000000',
+                borderBottom: idx < navigation.length - 1 ? '1px solid #808080' : 'none',
+              }}
+            >
+              {pathname === item.href ? '> ' : '\u00a0\u00a0'}{item.name}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }

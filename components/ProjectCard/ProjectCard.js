@@ -4,75 +4,198 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
+const WIN_FONT = "'Tahoma', 'MS Sans Serif', Arial, sans-serif";
+
 export default function ProjectCard({ project }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{
+        backgroundColor: '#d4d0c8',
+        borderTop:    '2px solid #ffffff',
+        borderLeft:   '2px solid #ffffff',
+        borderRight:  '2px solid #404040',
+        borderBottom: '2px solid #404040',
+        fontFamily: WIN_FONT,
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'none',
+        boxShadow: isHovered ? '3px 3px 0 #000000' : '2px 2px 0 #000000',
+      }}
     >
-      {/* Image Container */}
-      <div className="relative h-64 w-full overflow-hidden">
+      {/* Window title bar */}
+      <div
+        style={{
+          background: isHovered
+            ? 'linear-gradient(90deg, #1084d0 0%, #000080 100%)'
+            : 'linear-gradient(90deg, #000080 0%, #1084d0 100%)',
+          color: '#ffffff',
+          fontSize: '11px',
+          fontWeight: 'bold',
+          padding: '3px 6px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          userSelect: 'none',
+        }}
+      >
+        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span>&#128196;</span>
+          {project.title}
+        </span>
+        <span style={{ display: 'flex', gap: '2px' }}>
+          {['_', '□', '×'].map((btn, i) => (
+            <span
+              key={i}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '14px',
+                height: '12px',
+                backgroundColor: '#d4d0c8',
+                borderTop:    '1px solid #ffffff',
+                borderLeft:   '1px solid #ffffff',
+                borderRight:  '1px solid #404040',
+                borderBottom: '1px solid #404040',
+                color: '#000000',
+                fontSize: '8px',
+                fontWeight: 'bold',
+                cursor: 'default',
+              }}
+            >
+              {btn}
+            </span>
+          ))}
+        </span>
+      </div>
+
+      {/* Image area — sunken */}
+      <div
+        style={{
+          margin: '8px',
+          borderTop:    '2px solid #808080',
+          borderLeft:   '2px solid #808080',
+          borderRight:  '2px solid #ffffff',
+          borderBottom: '2px solid #ffffff',
+          overflow: 'hidden',
+          position: 'relative',
+          height: '160px',
+          backgroundColor: '#000000',
+        }}
+      >
         <Image
           src={project.imageUrl}
           alt={project.title}
           fill
-          className={`object-cover transition-transform duration-700 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-          
+          style={{
+            objectFit: 'cover',
+            imageRendering: 'auto',
+            filter: isHovered ? 'none' : 'saturate(0.85) contrast(1.05)',
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Scan-line overlay for retro feel */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 2px)',
+            pointerEvents: 'none',
+          }}
+        />
       </div>
 
-      {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors text-blue-300">
-          {project.title}
-        </h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">
-          {project.description}
-        </p>
+      {/* Content area */}
+      <div style={{ padding: '4px 10px 10px 10px', display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
+        {/* Description — in a sunken field */}
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            borderTop:    '1px solid #808080',
+            borderLeft:   '1px solid #808080',
+            borderRight:  '1px solid #ffffff',
+            borderBottom: '1px solid #ffffff',
+            padding: '4px 6px',
+            fontSize: '11px',
+            color: '#000000',
+            lineHeight: '1.5',
+          }}
+        >
+          {project.description
+            ? project.description.length > 90
+              ? project.description.slice(0, 90) + '…'
+              : project.description
+            : 'No description available.'}
+        </div>
 
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* Technologies — badge row */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
           {project.technologies.slice(0, 3).map((tech, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-blue-100 hover:text-blue-600 transition-colors"
+              style={{
+                backgroundColor: '#000080',
+                color: '#ffffff',
+                fontSize: '10px',
+                padding: '1px 6px',
+                fontFamily: WIN_FONT,
+                border: '1px solid #000040',
+              }}
             >
               {tech}
             </span>
           ))}
           {project.technologies.length > 3 && (
-            <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-              +{project.technologies.length - 3}
+            <span
+              style={{
+                backgroundColor: '#808080',
+                color: '#ffffff',
+                fontSize: '10px',
+                padding: '1px 6px',
+                fontFamily: WIN_FONT,
+                border: '1px solid #404040',
+              }}
+            >
+              +{project.technologies.length - 3} more
             </span>
           )}
         </div>
 
-        {/* Link */}
-        <Link
-          href={`/projects/${project._id}`}
-          className="inline-flex items-center text-blue-600 font-medium group/link"
-        >
-          View Project
-          <svg
-            className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* Separator */}
+        <div
+          style={{
+            height: '1px',
+            backgroundColor: '#808080',
+            borderBottom: '1px solid #ffffff',
+          }}
+        />
+
+        {/* Footer row */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Link
+            href={`/projects/${project._id}`}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '3px 12px',
+              fontSize: '11px',
+              fontFamily: WIN_FONT,
+              textDecoration: 'none',
+              backgroundColor: '#d4d0c8',
+              color: '#000000',
+              borderTop:    '2px solid #ffffff',
+              borderLeft:   '2px solid #ffffff',
+              borderRight:  '2px solid #404040',
+              borderBottom: '2px solid #404040',
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
+            Open &gt;
+          </Link>
+        </div>
       </div>
     </div>
   );

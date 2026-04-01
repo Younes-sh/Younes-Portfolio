@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 export const metadata = {
-  title: 'My Portfolio',
+  title: 'Younes Sheikhlar — Portfolio',
   description: 'Full Stack Developer Portfolio',
   icons: {
     icon: '/favicon.png',
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50">
+      <body style={{ backgroundColor: '#008080', minHeight: '100vh', fontFamily: "'Tahoma', 'MS Sans Serif', Arial, sans-serif" }}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
