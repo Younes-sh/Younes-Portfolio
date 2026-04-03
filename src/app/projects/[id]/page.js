@@ -34,7 +34,7 @@ export default async function ProjectDetail({ params }) {
             src={serializedProject.imageUrl}
             alt={serializedProject.title}
             fill
-            className="object-cover"
+            className="lg:object-cover "
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
