@@ -27,7 +27,7 @@ export default async function ProjectDetail({ params }) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="lg:mt-16 mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <div className="relative h-96 w-full rounded-lg overflow-hidden mb-8">
           <Image
