@@ -39,7 +39,7 @@ export default function AboutPage() {
               <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10 rounded-2xl" />
                 <Image
-                  src="/assets/younes-3.jpeg"
+                  src="/assets/younes-3.png"
                   alt="Profile"
                   fill
                   className="object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
